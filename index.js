@@ -34,7 +34,7 @@ Article.prototype.getContent = function() {
   if (typeof this.cache['article-content'] !== 'undefined') {
     return this.cache['article-content'];
   }
-  var content = utils.extract(this.$, this.base, this.options).html();
+  var content = utils.extract(this.$, this.base, this.options).text();
 
   return this.cache['article-content'] = content;
 }
