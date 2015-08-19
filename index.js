@@ -1,5 +1,4 @@
 var utils = require('./lib/utils.js');
-var req = require('fetch').fetchUrl;
 var url = require('url');
 var cheerio = require('cheerio');
 
@@ -92,12 +91,8 @@ var read = module.exports = function(html, options, callback) {
   }
 
   if (!html.match(/^\s*</)) {
-    req(html, options, function(err, res, body) {
-      if (err) {
-        return callback(err);
-      }
-      parseDOM(body.toString(), url.parse(html));
-    });
+    // pass just <html> tag so parseDOM returns error because there's no body tag
+    parseDOM('<html></html>', null);
   } else {
     parseDOM(html, null);
   }
